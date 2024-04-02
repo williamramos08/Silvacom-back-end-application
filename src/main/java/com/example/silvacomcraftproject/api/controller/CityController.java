@@ -6,6 +6,7 @@ import com.example.silvacomcraftproject.service.CityService;
 import com.example.silvacomcraftproject.service.WeatherService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,21 +23,26 @@ public class CityController {
         this.cityService = cityService;
         this.weatherService = weatherService;
     }
+
+    @CrossOrigin(origins = "*")
     @GetMapping("/city")
     public City getCity(@RequestParam String id){
         return cityService.getCity(id);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/cities")
     public List<City> getAllCities() {
         return cityService.getAllCities();
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/city/weather")
     public WeatherResponse getCityWeather(@RequestParam String cityName) throws JsonProcessingException {
         return weatherService.getCurrentWeather(cityName);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/city/forecast")
     public List<WeatherResponse> getCityForecast(@RequestParam String cityName, @RequestParam(required = false) Integer days) throws JsonProcessingException {
         if (days == null) {
