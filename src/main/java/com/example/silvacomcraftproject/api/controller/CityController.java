@@ -38,18 +38,18 @@ public class CityController {
 
     @CrossOrigin(origins = "*")
     @GetMapping("/city/weather")
-    public WeatherResponse getCityWeather(@RequestParam String cityName) throws JsonProcessingException {
-        return weatherService.getCurrentWeather(cityName);
+    public WeatherResponse getCityWeather(@RequestParam String id) throws JsonProcessingException {
+        return weatherService.getCurrentWeather(id);
     }
 
     @CrossOrigin(origins = "*")
     @GetMapping("/city/forecast")
-    public List<WeatherResponse> getCityForecast(@RequestParam String cityName, @RequestParam(required = false) Integer days) throws JsonProcessingException {
+    public List<WeatherResponse> getCityForecast(@RequestParam String id, @RequestParam(required = false) Integer days) throws JsonProcessingException {
         if (days == null) {
             // Default to today's weather if no days parameter is provided
-            return List.of(weatherService.getCurrentWeather(cityName));
+            return List.of(weatherService.getCurrentWeather(id));
         }
-        return weatherService.getWeatherForecast(cityName, days);
+        return weatherService.getWeatherForecast(id, days);
     }
 
 }
